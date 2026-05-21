@@ -28,7 +28,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-display mt-5 text-4xl font-bold leading-[1.1] tracking-tight text-navy-900 sm:text-5xl lg:text-[3.25rem]"
+            className="font-display mt-5 text-3xl font-bold leading-[1.1] tracking-tight text-navy-900 sm:text-5xl lg:text-[3.25rem]"
           >
             Advanced Veterinary Care{" "}
             <span className="gradient-text">For Your Pets</span>
@@ -47,7 +47,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.18 }}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            className="mt-8 grid gap-3 grid-cols-1 sm:flex sm:flex-wrap"
           >
             <Link
               href={`#${SECTION_IDS.appointment}`}
@@ -81,7 +81,7 @@ export function Hero() {
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/60 shadow-glass-lg sm:aspect-[5/6] lg:aspect-square">
             <ImageWithSkeleton
-              src="https://images.unsplash.com/photo-1450778869180-41aaf06072ee?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1200&q=80"
               alt="Veterinarian caring for a happy dog in a modern clinic"
               fill
               className="object-cover"

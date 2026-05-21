@@ -20,8 +20,8 @@ export function Footer() {
   return (
     <footer className="relative border-t border-slate-200/80 bg-navy-900 text-slate-300">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-brand/50 to-transparent" />
-      <div className="mx-auto max-w-6xl px-4 py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12 md:py-14">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link
               href={`#${SECTION_IDS.home}`}
@@ -32,7 +32,7 @@ export function Footer() {
               </span>
               {SITE.name}
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-slate-400">
+            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-400">
               {SITE.tagline}. Compassionate care for every tail, whisker, and
               paw — in clinic and at home.
             </p>
@@ -42,7 +42,7 @@ export function Footer() {
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-white">
               Quick links
             </p>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="mt-4 space-y-2 text-xs sm:text-sm">
               {quickLinks.map((l) => (
                 <li key={l.href}>
                   <Link
@@ -60,7 +60,7 @@ export function Footer() {
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-white">
               Services
             </p>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="mt-4 space-y-2 text-xs sm:text-sm">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
                   <Link
@@ -78,7 +78,7 @@ export function Footer() {
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-white">
               Contact
             </p>
-            <ul className="mt-4 space-y-3 text-sm">
+            <ul className="mt-4 space-y-3 text-xs sm:text-sm">
               <li className="flex gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky-brand" />
                 <span>{SITE.address}</span>

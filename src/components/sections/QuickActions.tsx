@@ -78,7 +78,7 @@ export function QuickActions() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid gap-3 grid-cols-1 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
           {actions.map(({ title, icon: Icon, href }) => (
             <motion.div key={title} variants={item}>

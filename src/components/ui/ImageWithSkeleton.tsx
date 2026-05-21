@@ -49,7 +49,7 @@ export function ImageWithSkeleton({
             className={className}
             sizes={sizes}
             priority={priority}
-            onLoadingComplete={() => setLoaded(true)}
+            onLoad={() => setLoaded(true)}
           />
         ) : (
           <Image
@@ -60,7 +60,7 @@ export function ImageWithSkeleton({
             className={className}
             sizes={sizes}
             priority={priority}
-            onLoadingComplete={() => setLoaded(true)}
+            onLoad={() => setLoaded(true)}
           />
         )}
       </motion.div>

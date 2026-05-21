@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
-import { FloatingMobileButtons } from "@/components/layout/FloatingMobileButtons";
 import { SectionCTA } from "@/components/ui/SectionCTA";
 import { Hero } from "@/components/sections/Hero";
 import { QuickActions } from "@/components/sections/QuickActions";
@@ -47,7 +46,6 @@ export default function Home() {
       </main>
       <Footer />
       <MobileBottomNav />
-      <FloatingMobileButtons />
     </>
   );
 }

@@ -23,12 +23,12 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:gap-8 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass space-y-5 rounded-3xl p-6 shadow-glass-lg md:p-8"
+            className="glass space-y-4 sm:space-y-5 rounded-3xl p-5 shadow-glass-lg sm:p-6 md:p-8"
           >
             <div className="flex gap-3">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-sky-brand" />
@@ -93,7 +93,7 @@ export function Contact() {
             viewport={{ once: true }}
             className="overflow-hidden rounded-3xl border border-slate-100 bg-slate-100 shadow-inner"
           >
-            <div className="aspect-[4/3] w-full md:aspect-auto md:h-full md:min-h-[320px]">
+            <div className="aspect-[4/3] w-full min-h-[250px] sm:min-h-[300px] md:aspect-auto md:h-full md:min-h-[320px]">
               <iframe
                 title="Vet Buddy location map"
                 src="https://maps.google.com/maps?q=Jagat+Vihar+Patna+Bihar&t=&z=14&ie=UTF8&iwloc=&output=embed"

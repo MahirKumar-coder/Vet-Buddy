@@ -113,31 +113,31 @@ export function ConsultationSection() {
               ))}
             </ul>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end">
+            <div className="mt-10 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-end sm:flex-wrap lg:flex-nowrap">
               <Link
                 href={`#${SECTION_IDS.appointment}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-brand to-cyan-glow px-8 py-3.5 text-sm font-semibold text-white shadow-float transition hover:brightness-110"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-brand to-cyan-glow px-6 sm:px-8 py-3 sm:py-3.5 text-sm font-semibold text-white shadow-float transition hover:brightness-110 w-full sm:w-auto"
               >
                 <Video className="h-4 w-4" />
                 Consult Now
               </Link>
-              <div className="glass rounded-2xl border border-sky-100/80 px-5 py-4 shadow-glass">
+              <div className="glass rounded-2xl border border-sky-100/80 px-4 sm:px-5 py-3 sm:py-4 shadow-glass w-full sm:w-auto">
                 <p className="text-xs font-semibold uppercase text-slate-500">
                   Consultation fee
                 </p>
-                <p className="font-display mt-1 text-2xl font-bold text-navy-900">
+                <p className="font-display mt-1 text-xl sm:text-2xl font-bold text-navy-900">
                   ₹499{" "}
-                  <span className="text-base font-medium text-slate-500">
+                  <span className="text-sm sm:text-base font-medium text-slate-500">
                     / session
                   </span>
                 </p>
                 <ul className="mt-2 space-y-1 text-xs text-slate-600">
                   <li className="flex items-center gap-1.5">
-                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                     Includes digital prescription note
                   </li>
                   <li className="flex items-center gap-1.5">
-                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                    <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                     Follow-up chat for 24 hours
                   </li>
                 </ul>

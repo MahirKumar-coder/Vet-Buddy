@@ -61,7 +61,7 @@ export function AppointmentForm() {
         >
           <form
             onSubmit={handleSubmit}
-            className="glass space-y-4 rounded-3xl p-6 shadow-glass-lg md:p-8"
+            className="glass space-y-4 rounded-3xl p-5 shadow-glass-lg sm:p-6 md:p-8"
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-sm font-medium text-navy-900">
