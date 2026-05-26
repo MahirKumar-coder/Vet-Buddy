@@ -139,7 +139,7 @@ export const getUserActivityLogs = async (userId: string): Promise<ActivityLog[]
     const snapshot = await get(logsRef);
     if (snapshot.exists()) {
       return Object.entries(snapshot.val())
-        .map(([id, log]) => ({ id, ...log } as ActivityLog))
+        .map(([id, log]: [string, any]) => ({ id, ...log } as ActivityLog))
         .filter((log) => log.userId === userId)
         .sort((a, b) => b.timestamp - a.timestamp);
     }
