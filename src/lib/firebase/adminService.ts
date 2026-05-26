@@ -147,11 +147,7 @@ export const deleteAdmin = async (adminId: string): Promise<void> => {
         throw new Error("Cannot delete the current logged-in admin");
       }
 
-      // Delete Firebase Auth user
-      const userRef = auth.getUser(admin.uid);
-      if (userRef) {
-        await deleteUser(userRef);
-      }
+      await auth.deleteUser(admin.uid);
     }
 
     // Delete admin document
