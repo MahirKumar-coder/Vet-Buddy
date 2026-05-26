@@ -3,8 +3,5 @@
   "devCommand": "npm run dev",
   "env": {
     "SKIP_ENV_VALIDATION": "true"
-  },
-  "typescript": {
-    "tsconfigPath": "tsconfig.json"
   }
 }
