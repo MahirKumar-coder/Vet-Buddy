@@ -135,7 +135,7 @@ export const getCustomerChats = async (customerId: string): Promise<Chat[]> => {
       const allChats = snapshot.val();
       return Object.entries(allChats)
         .filter(([, chat]: [string, any]) => chat.customerId === customerId)
-        .map(([id, chat]) => ({ id, ...chat } as Chat));
+        .map(([id, chat]: [string, any]) => ({ id, ...chat } as Chat));
     }
     return [];
   } catch (error) {
