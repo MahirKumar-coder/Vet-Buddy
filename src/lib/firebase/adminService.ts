@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
-import { createUserWithEmailAndPassword, deleteUser, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 export interface Admin {
   id?: string;
@@ -137,20 +137,21 @@ export const updateAdmin = async (
   }
 };
 
-// Delete admin
+// Delete admin (removes from Firestore only - Firebase Auth deletion should be handled on backend)
 export const deleteAdmin = async (adminId: string): Promise<void> => {
   try {
     const admin = await getAdmin(adminId);
+    
+    // Check if trying to delete current user
     if (admin && admin.uid) {
-      const adminUser = auth.currentUser;
-      if (adminUser?.uid === admin.uid) {
+      const currentUser = auth.currentUser;
+      if (currentUser?.uid === admin.uid) {
         throw new Error("Cannot delete the current logged-in admin");
       }
-
-      await auth.deleteUser(admin.uid);
     }
 
-    // Delete admin document
+    // Delete admin document from Firestore
+    // Note: Firebase Auth user deletion is handled on the backend for security
     await deleteDoc(doc(adminsCollection, adminId));
   } catch (error) {
     console.error("Error deleting admin:", error);
@@ -170,7 +171,9 @@ export const hasPermission = (
 };
 
 // Get admin by role
-export const getAdminsByRole = async (role: Admin["role"]): Promise<Admin[]> => {
+export const getAdminsByRole = async (
+  role: Admin["role"]
+): Promise<Admin[]> => {
   try {
     const q = query(adminsCollection, where("role", "==", role));
     const snapshot = await getDocs(q);
@@ -182,4 +185,16 @@ export const getAdminsByRole = async (role: Admin["role"]): Promise<Admin[]> => 
     console.error("Error fetching admins by role:", error);
     throw error;
   }
+};
+
+export default {
+  createAdmin,
+  getAllAdmins,
+  getAdminByEmail,
+  getAdminByUID,
+  getAdmin,
+  updateAdmin,
+  deleteAdmin,
+  hasPermission,
+  getAdminsByRole,
 };
