@@ -157,7 +157,7 @@ export const getAllActivityLogs = async (): Promise<ActivityLog[]> => {
     const snapshot = await get(logsRef);
     if (snapshot.exists()) {
       return Object.entries(snapshot.val())
-        .map(([id, log]) => ({ id, ...log } as ActivityLog))
+        .map(([id, log]: [string, any]) => ({ id, ...log } as ActivityLog))
         .sort((a, b) => b.timestamp - a.timestamp);
     }
     return [];
@@ -175,7 +175,7 @@ export const listenToActivityLogs = (
   onValue(logsRef, (snapshot) => {
     if (snapshot.exists()) {
       const logs = Object.entries(snapshot.val())
-        .map(([id, log]) => ({ id, ...log } as ActivityLog))
+        .map(([id, log]: [string, any]) => ({ id, ...log } as ActivityLog))
         .sort((a, b) => b.timestamp - a.timestamp);
       callback(logs);
     } else {
