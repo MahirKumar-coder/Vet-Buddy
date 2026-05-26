@@ -44,7 +44,7 @@ export const getUserNotifications = async (userId: string): Promise<Notification
     const snapshot = await get(notificationsRef);
     if (snapshot.exists()) {
       return Object.entries(snapshot.val())
-        .map(([id, notif]) => ({ id, ...notif } as Notification))
+        .map(([id, notif]: [string, any]) => ({ id, ...notif } as Notification))
         .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     }
     return [];
@@ -74,7 +74,7 @@ export const listenToNotifications = (
   onValue(notificationsRef, (snapshot) => {
     if (snapshot.exists()) {
       const notifications = Object.entries(snapshot.val())
-        .map(([id, notif]) => ({ id, ...notif } as Notification))
+        .map(([id, notif]: [string, any]) => ({ id, ...notif } as Notification))
         .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
       callback(notifications);
     } else {
