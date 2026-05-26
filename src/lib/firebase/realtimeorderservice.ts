@@ -88,7 +88,7 @@ export const getAllOrders = async (): Promise<Order[]> => {
     if (snapshot.exists()) {
       const allOrders = snapshot.val();
       return Object.entries(allOrders)
-        .map(([id, order]) => ({ id, ...order } as Order))
+        .map(([id, order]: [string, any]) => ({ id, ...order } as Order))
         .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
     return [];
@@ -107,7 +107,7 @@ export const getCustomerOrders = async (customerId: string): Promise<Order[]> =>
       const allOrders = snapshot.val();
       return Object.entries(allOrders)
         .filter(([, order]: [string, any]) => order.customerId === customerId)
-        .map(([id, order]) => ({ id, ...order } as Order))
+        .map(([id, order]: [string, any]) => ({ id, ...order } as Order))
         .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
     return [];
@@ -126,7 +126,7 @@ export const listenToOrders = (
     if (snapshot.exists()) {
       const allOrders = snapshot.val();
       const orders = Object.entries(allOrders)
-        .map(([id, order]) => ({ id, ...order } as Order))
+        .map(([id, order]: [string, any]) => ({ id, ...order } as Order))
         .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
       callback(orders);
     } else {
