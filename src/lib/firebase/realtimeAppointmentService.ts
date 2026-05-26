@@ -69,10 +69,10 @@ export const getCustomerAppointments = async (
     const appointmentsRef = ref(realtimeDb, "appointments");
     const snapshot = await get(appointmentsRef);
     if (snapshot.exists()) {
-      const allAppointments = snapshot.val();
+      const allAppointments = snapshot.val() as Record<string, any>;
       return Object.entries(allAppointments)
-  .filter(([, apt]: [string, any]) => apt.customerId === customerId)
-  .map(([id, apt]: [string, any]) => ({ id, ...(apt as any) } as Appointment))
+        .filter(([, apt]: [string, any]) => apt.customerId === customerId)
+        .map(([id, apt]: [string, any]) => ({ id, ...(apt as Appointment) } as Appointment))
         .sort((a, b) => {
           const dateTimeA = new Date(`${a.appointmentDate} ${a.appointmentTime}`);
           const dateTimeB = new Date(`${b.appointmentDate} ${b.appointmentTime}`);
@@ -92,9 +92,9 @@ export const getAllAppointments = async (): Promise<Appointment[]> => {
     const appointmentsRef = ref(realtimeDb, "appointments");
     const snapshot = await get(appointmentsRef);
     if (snapshot.exists()) {
-      const allAppointments = snapshot.val();
+      const allAppointments = snapshot.val() as Record<string, any>;
       return Object.entries(allAppointments)
-        .map(([id, apt]) => ({ id, ...apt } as Appointment))
+        .map(([id, apt]: [string, any]) => ({ id, ...(apt as Appointment) } as Appointment))
         .sort((a, b) => {
           const dateTimeA = new Date(`${a.appointmentDate} ${a.appointmentTime}`);
           const dateTimeB = new Date(`${b.appointmentDate} ${b.appointmentTime}`);
@@ -115,9 +115,9 @@ export const listenToAppointments = (
   const appointmentsRef = ref(realtimeDb, "appointments");
   onValue(appointmentsRef, (snapshot) => {
     if (snapshot.exists()) {
-      const allAppointments = snapshot.val();
+      const allAppointments = snapshot.val() as Record<string, any>;
       const appointments = Object.entries(allAppointments)
-        .map(([id, apt]) => ({ id, ...apt } as Appointment))
+        .map(([id, apt]: [string, any]) => ({ id, ...(apt as Appointment) } as Appointment))
         .sort((a, b) => {
           const dateTimeA = new Date(`${a.appointmentDate} ${a.appointmentTime}`);
           const dateTimeB = new Date(`${b.appointmentDate} ${b.appointmentTime}`);
@@ -211,4 +211,17 @@ export const getAvailableTimeSlots = async (date: string): Promise<string[]> => 
     console.error("Error fetching available time slots:", error);
     throw error;
   }
+};
+
+export default {
+  createAppointment,
+  getAppointment,
+  getCustomerAppointments,
+  getAllAppointments,
+  listenToAppointments,
+  updateAppointment,
+  updateAppointmentStatus,
+  deleteAppointment,
+  getAppointmentsByDate,
+  getAvailableTimeSlots,
 };
