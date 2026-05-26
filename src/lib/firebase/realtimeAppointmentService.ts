@@ -71,8 +71,8 @@ export const getCustomerAppointments = async (
     if (snapshot.exists()) {
       const allAppointments = snapshot.val();
       return Object.entries(allAppointments)
-        .filter(([, apt]: [string, any]) => apt.customerId === customerId)
-        .map(([id, apt]) => ({ id, ...apt } as Appointment))
+  .filter(([, apt]: [string, any]) => apt.customerId === customerId)
+  .map(([id, apt]: [string, any]) => ({ id, ...(apt as any) } as Appointment))
         .sort((a, b) => {
           const dateTimeA = new Date(`${a.appointmentDate} ${a.appointmentTime}`);
           const dateTimeB = new Date(`${b.appointmentDate} ${b.appointmentTime}`);
