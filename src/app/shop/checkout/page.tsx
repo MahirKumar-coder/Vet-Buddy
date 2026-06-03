@@ -87,6 +87,7 @@ function CheckoutContent() {
       // 📝 Try to create order via backend API first
       let backendOrderId = "";
       let backendTotal = total;
+      let resolvedDbOrderId = "";
       try {
         const order = (await createOrder({
           customerName: form.customerName,
@@ -101,11 +102,12 @@ function CheckoutContent() {
           },
           items: orderItems,
           ...(coupon ? { couponCode: coupon } : {}),
-        })) as { orderId: string; _id: string; total: number } | null;
+        })) as { orderId: string; id?: string; _id?: string; total: number } | null;
 
         if (order) {
           backendOrderId = order.orderId;
-          setDbOrderId(order._id);
+          resolvedDbOrderId = order.id || order._id || "";
+          setDbOrderId(resolvedDbOrderId);
           backendTotal = order.total;
         }
       } catch (apiError) {
@@ -119,34 +121,40 @@ function CheckoutContent() {
       const fallbackOrderId = backendOrderId || `VB${Date.now()}`;
       setOrderId(fallbackOrderId);
 
-      const firebaseOrder = {
-        customerId,
-        customerName: form.customerName,
-        customerEmail: form.email,
-        customerPhone: form.phone,
-        items: orderItems,
-        shippingAddress: {
-          line1: form.line1,
-          line2: form.line2,
-          city: form.city,
-          state: form.state,
-          pincode: form.pincode,
-        },
-        subtotal: checkoutItems.reduce((s, i) => s + i.price * i.quantity, 0),
-        tax: 0,
-        deliveryCharge: 0,
-        totalAmount: backendTotal,
-        ...(coupon ? { couponCode: coupon } : {}), // ✅ FIXED
-        status: "pending" as const,
-        paymentMethod: "upi",
-        orderId: fallbackOrderId,
-        notes: "",
-      };
+      // Only save to Firebase from client-side if the backend failed to do so
+      if (!backendOrderId) {
+        const firebaseOrder = {
+          customerId,
+          customerName: form.customerName,
+          customerEmail: form.email,
+          customerPhone: form.phone,
+          items: orderItems,
+          shippingAddress: {
+            line1: form.line1,
+            line2: form.line2,
+            city: form.city,
+            state: form.state,
+            pincode: form.pincode,
+          },
+          subtotal: checkoutItems.reduce((s, i) => s + i.price * i.quantity, 0),
+          tax: 0,
+          deliveryCharge: 0,
+          totalAmount: backendTotal,
+          ...(coupon ? { couponCode: coupon } : {}),
+          status: "pending" as const,
+          paymentMethod: "upi",
+          orderId: fallbackOrderId,
+          notes: "",
+        };
 
-      console.log("🚀 Saving order to Firebase:", firebaseOrder);
-      const fbOrderId = await createOrderFirebase(firebaseOrder);
-      setFirebaseOrderId(fbOrderId);
-      console.log("✅ Order saved to Firebase with ID:", fbOrderId);
+        console.log("🚀 Saving order to Firebase (fallback):", firebaseOrder);
+        const fbOrderId = await createOrderFirebase(firebaseOrder);
+        setFirebaseOrderId(fbOrderId);
+        setDbOrderId(fbOrderId);
+        console.log("✅ Order saved to Firebase with ID:", fbOrderId);
+      } else {
+        setFirebaseOrderId(resolvedDbOrderId);
+      }
 
       setTotal(backendTotal);
       setStep("payment");
