@@ -54,45 +54,39 @@ export const verifyRazorpayPayment = async (req, res) => {
   try {
     const { razorpayOrderId, razorpayPaymentId, razorpaySignature, dbOrderId, orderId } = req.body;
 
-    const isDemo = req.body.isDemo || razorpaySignature === "demo_bypass_signature";
-
-    if (!isDemo && (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature)) {
+    if (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
       return res.status(400).json({
         success: false,
         message: "Missing payment details",
       });
     }
 
-    if (isDemo) {
-      console.log("⚠️ DEMO PAYMENT BYPASS - Skipping Razorpay signature verification and capture check!");
-    } else {
-      // Verify signature
-      const body = razorpayOrderId + "|" + razorpayPaymentId;
-      const expectedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "dummy_secret")
-        .update(body)
-        .digest("hex");
+    // Verify signature
+    const body = razorpayOrderId + "|" + razorpayPaymentId;
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "dummy_secret")
+      .update(body)
+      .digest("hex");
 
-      if (expectedSignature !== razorpaySignature) {
-        console.warn("❌ Signature mismatch for payment:", razorpayPaymentId);
-        return res.status(400).json({
-          success: false,
-          message: "Invalid payment signature",
-        });
-      }
+    if (expectedSignature !== razorpaySignature) {
+      console.warn("❌ Signature mismatch for payment:", razorpayPaymentId);
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment signature",
+      });
+    }
 
-      console.log("✅ Signature verified for payment:", razorpayPaymentId);
+    console.log("✅ Signature verified for payment:", razorpayPaymentId);
 
-      const razorpay = getRazorpayInstance();
-      // Fetch payment details from Razorpay to double-check
-      const payment = await razorpay.payments.fetch(razorpayPaymentId);
+    const razorpay = getRazorpayInstance();
+    // Fetch payment details from Razorpay to double-check
+    const payment = await razorpay.payments.fetch(razorpayPaymentId);
 
-      if (payment.status !== "captured") {
-        return res.status(400).json({
-          success: false,
-          message: "Payment not captured by Razorpay",
-        });
-      }
+    if (payment.status !== "captured") {
+      return res.status(400).json({
+        success: false,
+        message: "Payment not captured by Razorpay",
+      });
     }
 
     const db = getRealtimeDatabase();

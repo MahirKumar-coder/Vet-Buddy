@@ -81,7 +81,7 @@ export function Hero() {
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/60 shadow-glass-lg sm:aspect-[5/6] lg:aspect-square">
             <ImageWithSkeleton
-              src="/hero-dog.jpg"
+              src="/hero-dog.jpeg"
               alt="Happy Golden Labrador smiling at home"
               fill
               className="object-cover"

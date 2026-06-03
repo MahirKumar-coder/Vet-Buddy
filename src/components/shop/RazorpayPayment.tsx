@@ -47,49 +47,6 @@ export function RazorpayPayment({
     };
   }, []);
 
-  const handleDemoPayment = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      const verifyResponse = await fetch("/api/payment/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          razorpayOrderId: "demo_order_" + Date.now(),
-          razorpayPaymentId: "demo_pay_" + Date.now(),
-          razorpaySignature: "demo_bypass_signature",
-          dbOrderId,
-          orderId,
-          isDemo: true,
-        }),
-      });
-
-      if (!verifyResponse.ok) {
-        throw new Error("Demo payment verification failed");
-      }
-
-      const verifyData = await verifyResponse.json();
-      if (!verifyData.success) {
-        throw new Error(verifyData.message || "Demo verification failed");
-      }
-
-      setPaid(true);
-      setTimeout(() =>
-        onSuccess({
-          razorpayPaymentId: "demo_pay_" + Date.now(),
-          razorpayOrderId: "demo_order_" + Date.now(),
-          orderId,
-        }),
-        800
-      );
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Demo payment failed";
-      onError(message);
-      setLoading(false);
-    }
-  };
-
   const handlePayment = async () => {
     if (loading) return;
     setLoading(true);
@@ -259,22 +216,6 @@ export function RazorpayPayment({
                 </>
               ) : (
                 "Pay Now with Razorpay"
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleDemoPayment}
-              disabled={loading}
-              className="mt-3 w-full rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 py-2.5 text-sm font-semibold text-emerald-400 disabled:opacity-50 transition flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <>
-                  <FiLoader className="animate-spin" />
-                  Processing Demo...
-                </>
-              ) : (
-                "Simulate Demo Payment (Test Flow)"
               )}
             </button>
 
