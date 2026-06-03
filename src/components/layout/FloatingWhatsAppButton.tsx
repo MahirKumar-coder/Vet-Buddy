@@ -12,7 +12,7 @@ export function FloatingWhatsAppButton() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
       whileHover={{ scale: 1.1 }}
-      className="pointer-events-auto fixed bottom-6 right-6 z-40"
+      className="pointer-events-auto fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40"
     >
       <Link
         href={SITE.whatsappUrl}
