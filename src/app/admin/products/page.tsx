@@ -13,7 +13,7 @@ export default function AdminProductsPage() {
   const [form, setForm] = useState({
     name: "",
     description: "",
-    categorySlug: "dog-food",
+    categorySlug: "",
     price: "",
     compareAtPrice: "",
     stock: "",
@@ -70,7 +70,7 @@ export default function AdminProductsPage() {
       body: JSON.stringify({
         name: form.name,
         description: form.description,
-        categorySlug: form.categorySlug,
+        categorySlug: "",
         images,
         price: Number(form.price),
         compareAtPrice: Number(form.compareAtPrice) || 0,
@@ -81,7 +81,7 @@ export default function AdminProductsPage() {
     setForm({
       name: "",
       description: "",
-      categorySlug: "dog-food",
+      categorySlug: "",
       price: "",
       compareAtPrice: "",
       stock: "",
@@ -118,17 +118,7 @@ export default function AdminProductsPage() {
           onChange={(e) => setForm({ ...form, description: e.target.value })}
           className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2"
         />
-        <select
-          value={form.categorySlug}
-          onChange={(e) => setForm({ ...form, categorySlug: e.target.value })}
-          className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2"
-        >
-          {SHOP_CATEGORIES.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name}
-            </option>
-          ))}
-        </select>
+
         <div className="flex gap-2">
           <input
             placeholder="Price"

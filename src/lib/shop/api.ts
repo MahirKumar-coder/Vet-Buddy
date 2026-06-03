@@ -1,7 +1,15 @@
 import type { Product, Category, ShopFilters, Pagination } from "@/types/shop";
-import { DUMMY_PRODUCTS, DUMMY_CATEGORIES } from "./dummyProducts";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_URL = (() => {
+  let url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+  if (url.endsWith("/")) {
+    url = url.slice(0, -1);
+  }
+  if (!url.endsWith("/api")) {
+    url = `${url}/api`;
+  }
+  return url;
+})();
 
 async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T | null> {
   try {
@@ -20,45 +28,6 @@ async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T | nul
   }
 }
 
-function filterDummyProducts(filters: ShopFilters) {
-  let list = [...DUMMY_PRODUCTS];
-  if (filters.category) {
-    list = list.filter((p) => p.categorySlug === filters.category);
-  }
-  if (filters.breed) {
-    const b = filters.breed.toLowerCase();
-    list = list.filter((p) => p.breed?.toLowerCase() === b);
-  }
-  if (filters.search) {
-    const q = filters.search.toLowerCase();
-    list = list.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.tags.some((t) => t.toLowerCase().includes(q))
-    );
-  }
-  if (filters.bestSeller) list = list.filter((p) => p.isBestSeller);
-  if (filters.minPrice) list = list.filter((p) => p.price >= filters.minPrice!);
-  if (filters.maxPrice) list = list.filter((p) => p.price <= filters.maxPrice!);
-
-  const sort = filters.sort || "newest";
-  if (sort === "price_asc") list.sort((a, b) => a.price - b.price);
-  else if (sort === "price_desc") list.sort((a, b) => b.price - a.price);
-  else if (sort === "rating") list.sort((a, b) => b.rating - a.rating);
-
-  const page = filters.page || 1;
-  const limit = filters.limit || 12;
-  const total = list.length;
-  const start = (page - 1) * limit;
-  const products = list.slice(start, start + limit);
-
-  return {
-    products,
-    pagination: { page, limit, total, pages: Math.ceil(total / limit) } as Pagination,
-  };
-}
-
 export async function getProducts(filters: ShopFilters = {}) {
   const params = new URLSearchParams();
   Object.entries(filters).forEach(([k, v]) => {
@@ -68,19 +37,27 @@ export async function getProducts(filters: ShopFilters = {}) {
     `/products?${params}`
   );
   if (data?.products?.length) return data;
-  return filterDummyProducts(filters);
+  return {
+    products: [],
+    pagination: {
+      page: filters.page || 1,
+      limit: filters.limit || 12,
+      total: 0,
+      pages: 0,
+    },
+  };
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {
   const data = await fetchAPI<Product>(`/products/${slug}`);
   if (data) return data;
-  return DUMMY_PRODUCTS.find((p) => p.slug === slug || p._id === slug) || null;
+  return null;
 }
 
 export async function getCategories(): Promise<Category[]> {
   const data = await fetchAPI<Category[]>("/categories");
   if (data?.length) return data;
-  return DUMMY_CATEGORIES;
+  return [];
 }
 
 export async function getRelatedProducts(

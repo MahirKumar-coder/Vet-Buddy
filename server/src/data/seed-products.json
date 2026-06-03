@@ -1,197 +1,1462 @@
 {
   "categories": [
-    { "name": "Dog Food", "slug": "dog-food", "icon": "dog" },
-    { "name": "Cat Food", "slug": "cat-food", "icon": "cat" },
-    { "name": "Pet Toys", "slug": "pet-toys", "icon": "toy" },
-    { "name": "Medicines", "slug": "medicines", "icon": "pill" },
-    { "name": "Grooming", "slug": "grooming", "icon": "brush" },
-    { "name": "Accessories", "slug": "accessories", "icon": "collar" },
-    { "name": "Vaccines", "slug": "vaccines", "icon": "syringe" }
+    {
+      "name": "Dog Food",
+      "slug": "dog-food",
+      "icon": "dog"
+    },
+    {
+      "name": "Cat Food",
+      "slug": "cat-food",
+      "icon": "cat"
+    },
+    {
+      "name": "Pet Toys",
+      "slug": "pet-toys",
+      "icon": "toy"
+    },
+    {
+      "name": "Medicines",
+      "slug": "medicines",
+      "icon": "pill"
+    },
+    {
+      "name": "Grooming",
+      "slug": "grooming",
+      "icon": "brush"
+    },
+    {
+      "name": "Accessories",
+      "slug": "accessories",
+      "icon": "collar"
+    },
+    {
+      "name": "Vaccines",
+      "slug": "vaccines",
+      "icon": "syringe"
+    }
   ],
   "products": [
     {
-      "name": "Royal Canin Adult Dog Food 3kg",
-      "slug": "royal-canin-adult-dog-food-3kg",
-      "description": "Premium nutrition for adult dogs with balanced protein and omega fatty acids.",
-      "categorySlug": "dog-food",
-      "breed": "Golden Retriever",
-      "images": ["https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=600&q=80"],
-      "price": 1899,
-      "compareAtPrice": 2299,
-      "stock": 45,
-      "rating": 4.8,
-      "reviewCount": 312,
-      "isBestSeller": true,
-      "tags": ["dog", "food", "premium"]
-    },
-    {
-      "name": "Whiskas Ocean Fish Cat Food 1.2kg",
-      "slug": "whiskas-ocean-fish-cat-food",
-      "description": "Complete and balanced nutrition for adult cats.",
-      "categorySlug": "cat-food",
-      "breed": "",
-      "images": ["https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80"],
-      "price": 449,
-      "compareAtPrice": 549,
-      "stock": 80,
-      "rating": 4.6,
-      "reviewCount": 198,
-      "isBestSeller": true,
-      "tags": ["cat", "food"]
-    },
-    {
-      "name": "Interactive Rope Tug Toy",
-      "slug": "interactive-rope-tug-toy",
-      "description": "Durable cotton rope toy for active play and dental health.",
-      "categorySlug": "pet-toys",
-      "breed": "Labrador",
-      "images": ["https://images.unsplash.com/photo-1601758228041-f3b279525f1f?w=600&q=80"],
-      "price": 299,
-      "compareAtPrice": 399,
-      "stock": 120,
-      "rating": 4.5,
-      "reviewCount": 87,
-      "isBestSeller": false,
-      "tags": ["toy", "dog"]
-    },
-    {
-      "name": "Deworming Tablets (Pack of 4)",
-      "slug": "deworming-tablets-pack",
-      "description": "Vet-recommended broad spectrum dewormer for dogs and cats.",
+      "name": "AZITHROHAT-300",
+      "slug": "azithrohat-300",
+      "description": "Veterinary medicine - AZITHROHAT-300. Prescription strength medication for pets.",
       "categorySlug": "medicines",
       "breed": "",
-      "images": ["https://images.unsplash.com/photo-1584308664894-14d9f170c3b0?w=600&q=80"],
-      "price": 199,
-      "compareAtPrice": 249,
-      "stock": 60,
-      "rating": 4.7,
-      "reviewCount": 156,
-      "isBestSeller": true,
-      "tags": ["medicine", "health"]
-    },
-    {
-      "name": "Pet Grooming Kit Pro",
-      "slug": "pet-grooming-kit-pro",
-      "description": "Brush, comb, nail clipper and deshedding tool in one kit.",
-      "categorySlug": "grooming",
-      "breed": "Shih Tzu",
-      "images": ["https://images.unsplash.com/photo-1516734212186-a967f81ad0d8?w=600&q=80"],
-      "price": 899,
-      "compareAtPrice": 1199,
-      "stock": 35,
-      "rating": 4.4,
-      "reviewCount": 64,
+      "images": [
+        "/products/azithrohat-300.jpeg"
+      ],
+      "price": 187.5,
+      "compareAtPrice": 216,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 40,
       "isBestSeller": false,
-      "tags": ["grooming"]
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
     },
     {
-      "name": "Reflective Dog Harness & Leash Set",
-      "slug": "reflective-dog-harness-leash",
-      "description": "Adjustable padded harness with 1.5m reflective leash.",
-      "categorySlug": "accessories",
-      "breed": "German Shepherd",
-      "images": ["https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=600&q=80"],
-      "price": 749,
-      "compareAtPrice": 999,
-      "stock": 50,
-      "rating": 4.6,
-      "reviewCount": 112,
-      "isBestSeller": true,
-      "tags": ["accessories", "walk"]
-    },
-    {
-      "name": "Anti-Rabies Vaccine (Vet Administered)",
-      "slug": "anti-rabies-vaccine-vet",
-      "description": "Schedule at Vet Buddy clinic. Includes consultation.",
-      "categorySlug": "vaccines",
+      "name": "CARPOHAT-50 TAB",
+      "slug": "carpohat-50-tab",
+      "description": "Veterinary medicine - CARPOHAT-50 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
       "breed": "",
-      "images": ["https://images.unsplash.com/photo-1576201836106-db1758fd1c76?w=600&q=80"],
-      "price": 599,
-      "compareAtPrice": 699,
-      "stock": 100,
-      "rating": 4.9,
-      "reviewCount": 240,
-      "isBestSeller": true,
-      "tags": ["vaccine", "clinic"]
+      "images": [
+        "/products/carpohat-50-tab.jpeg"
+      ],
+      "price": 187.5,
+      "compareAtPrice": 216,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 32,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
     },
     {
-      "name": "Husky Breed Puppy Food 2kg",
-      "slug": "husky-breed-puppy-food-2kg",
-      "description": "High-energy formula for active northern breeds.",
-      "categorySlug": "dog-food",
-      "breed": "Husky",
-      "images": ["https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80"],
-      "price": 1299,
-      "compareAtPrice": 1599,
-      "stock": 28,
-      "rating": 4.7,
+      "name": "CLINDAHAT-250 TAB",
+      "slug": "clindahat-250-tab",
+      "description": "Veterinary medicine - CLINDAHAT-250 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/clindahat-250-tab.jpeg"
+      ],
+      "price": 190,
+      "compareAtPrice": 218,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 25,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "CLINDAHAT 600MG TAB",
+      "slug": "clindahat-600mg-tab",
+      "description": "Veterinary medicine - CLINDAHAT 600MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/clindahat-600mg-tab.jpeg"
+      ],
+      "price": 320,
+      "compareAtPrice": 368,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 36,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "ENROHAT-DT 200",
+      "slug": "enrohat-dt-200",
+      "description": "Veterinary medicine - ENROHAT-DT 200. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/enrohat-dt-200.jpeg"
+      ],
+      "price": 140.63,
+      "compareAtPrice": 162,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 47,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATCAL-D TAB",
+      "slug": "hatcal-d-tab",
+      "description": "Veterinary medicine - HATCAL-D TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatcal-d-tab.jpeg"
+      ],
+      "price": 200,
+      "compareAtPrice": 230,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 18,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATCAL-RENAL TAB",
+      "slug": "hatcal-renal-tab",
+      "description": "Veterinary medicine - HATCAL-RENAL TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatcal-renal-tab.jpeg"
+      ],
+      "price": 190,
+      "compareAtPrice": 218,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 16,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATCLAV 500 TAB",
+      "slug": "hatclav-500-tab",
+      "description": "Veterinary medicine - HATCLAV 500 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatclav-500-tab.jpeg"
+      ],
+      "price": 215.63,
+      "compareAtPrice": 248,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 19,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATCORT MP TAB",
+      "slug": "hatcort-mp-tab",
+      "description": "Veterinary medicine - HATCORT MP TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatcort-mp-tab.jpeg"
+      ],
+      "price": 52.5,
+      "compareAtPrice": 60,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 10,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATFUR OMEGA TAB",
+      "slug": "hatfur-omega-tab",
+      "description": "Veterinary medicine - HATFUR OMEGA TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatfur-omega-tab.jpeg"
+      ],
+      "price": 180,
+      "compareAtPrice": 207,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 23,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATFUR-Z TAB",
+      "slug": "hatfur-z-tab",
+      "description": "Veterinary medicine - HATFUR-Z TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatfur-z-tab.jpeg"
+      ],
+      "price": 180,
+      "compareAtPrice": 207,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 11,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATJOINT PLUS TAB",
+      "slug": "hatjoint-plus-tab",
+      "description": "Veterinary medicine - HATJOINT PLUS TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatjoint-plus-tab.jpeg"
+      ],
+      "price": 300,
+      "compareAtPrice": 345,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 34,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATLAC PLUS TAB",
+      "slug": "hatlac-plus-tab",
+      "description": "Veterinary medicine - HATLAC PLUS TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatlac-plus-tab.jpeg"
+      ],
+      "price": 160,
+      "compareAtPrice": 184,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 40,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATLEXIN-300 TAB",
+      "slug": "hatlexin-300-tab",
+      "description": "Veterinary medicine - HATLEXIN-300 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatlexin-300-tab.jpeg"
+      ],
+      "price": 178.13,
+      "compareAtPrice": 205,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 10,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATLEXIN-600 TAB",
+      "slug": "hatlexin-600-tab",
+      "description": "Veterinary medicine - HATLEXIN-600 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatlexin-600-tab.jpeg"
+      ],
+      "price": 309.38,
+      "compareAtPrice": 356,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 41,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATLEXIN-1000 TAB",
+      "slug": "hatlexin-1000-tab",
+      "description": "Veterinary medicine - HATLEXIN-1000 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatlexin-1000-tab.jpeg"
+      ],
+      "price": 459.38,
+      "compareAtPrice": 528,
+      "stock": 5,
+      "rating": 4.5,
       "reviewCount": 45,
       "isBestSeller": false,
-      "tags": ["dog", "puppy", "husky"]
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
     },
     {
-      "name": "Beagle Chew Bone (Pack of 6)",
-      "slug": "beagle-chew-bone-pack",
-      "description": "Natural dental chews for medium breeds.",
-      "categorySlug": "pet-toys",
-      "breed": "Beagle",
-      "images": ["https://images.unsplash.com/photo-1530281700549-e82e7eb16044?w=600&q=80"],
-      "price": 399,
-      "compareAtPrice": 499,
-      "stock": 70,
-      "rating": 4.3,
-      "reviewCount": 33,
-      "isBestSeller": false,
-      "tags": ["treat", "chew"]
-    },
-    {
-      "name": "Rottweiler Joint Support Supplement",
-      "slug": "rottweiler-joint-support",
-      "description": "Glucosamine and chondroitin for large breed joint care.",
+      "name": "HATPLAT TAB",
+      "slug": "hatplat-tab",
+      "description": "Veterinary medicine - HATPLAT TAB. Prescription strength medication for pets.",
       "categorySlug": "medicines",
-      "breed": "Rottweiler",
-      "images": ["https://images.unsplash.com/photo-1450778869185-41d0601e46f5?w=600&q=80"],
-      "price": 1099,
-      "compareAtPrice": 1399,
-      "stock": 22,
-      "rating": 4.8,
-      "reviewCount": 78,
-      "isBestSeller": true,
-      "tags": ["supplement", "joint"]
-    },
-    {
-      "name": "Cat Scratching Post Tower",
-      "slug": "cat-scratching-post-tower",
-      "description": "Multi-level sisal post with perch and toy ball.",
-      "categorySlug": "pet-toys",
       "breed": "",
-      "images": ["https://images.unsplash.com/photo-1495360010541-f48722b34f73?w=600&q=80"],
-      "price": 1599,
-      "compareAtPrice": 1999,
-      "stock": 18,
+      "images": [
+        "/products/hatplat-tab.jpeg"
+      ],
+      "price": 206.25,
+      "compareAtPrice": 237,
+      "stock": 5,
       "rating": 4.5,
-      "reviewCount": 91,
+      "reviewCount": 30,
       "isBestSeller": false,
-      "tags": ["cat", "furniture"]
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
     },
     {
-      "name": "Flea & Tick Spray 200ml",
-      "slug": "flea-tick-spray-200ml",
-      "description": "Fast-acting spray safe for dogs and cats over 8 weeks.",
+      "name": "HATPOD 200 DT TAB",
+      "slug": "hatpod-200-dt-tab",
+      "description": "Veterinary medicine - HATPOD 200 DT TAB. Prescription strength medication for pets.",
       "categorySlug": "medicines",
       "breed": "",
-      "images": ["https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=600&q=80"],
-      "price": 349,
-      "compareAtPrice": 429,
-      "stock": 55,
-      "rating": 4.4,
-      "reviewCount": 67,
+      "images": [
+        "/products/hatpod-200-dt-tab.jpeg"
+      ],
+      "price": 290.63,
+      "compareAtPrice": 334,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 56,
       "isBestSeller": false,
-      "tags": ["flea", "tick"]
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATPYRIN TAB",
+      "slug": "hatpyrin-tab",
+      "description": "Veterinary medicine - HATPYRIN TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatpyrin-tab.jpeg"
+      ],
+      "price": 140.63,
+      "compareAtPrice": 162,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 53,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATVIT-A TAB",
+      "slug": "hatvit-a-tab",
+      "description": "Veterinary medicine - HATVIT-A TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatvit-a-tab.jpeg"
+      ],
+      "price": 100,
+      "compareAtPrice": 115,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 34,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATZAPINE TAB",
+      "slug": "hatzapine-tab",
+      "description": "Veterinary medicine - HATZAPINE TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatzapine-tab.jpeg"
+      ],
+      "price": 140.63,
+      "compareAtPrice": 162,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 56,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATZINE-25",
+      "slug": "hatzine-25",
+      "description": "Veterinary medicine - HATZINE-25. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatzine-25.jpeg"
+      ],
+      "price": 65.63,
+      "compareAtPrice": 75,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 45,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATZINE-50",
+      "slug": "hatzine-50",
+      "description": "Veterinary medicine - HATZINE-50. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatzine-50-tab.jpeg"
+      ],
+      "price": 112.5,
+      "compareAtPrice": 129,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 23,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HEPARAJ PLUS TAB",
+      "slug": "heparaj-plus-tab",
+      "description": "Veterinary medicine - HEPARAJ PLUS TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/heparaj-plus-tab.jpeg"
+      ],
+      "price": 200,
+      "compareAtPrice": 230,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 11,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "INFLAHAT-TBR TAB",
+      "slug": "inflahat-tbr-tab",
+      "description": "Veterinary medicine - INFLAHAT-TBR TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/inflahat-tbr-tab.jpeg"
+      ],
+      "price": 240,
+      "compareAtPrice": 276,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 16,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "ITRARAJ-100MG TAB",
+      "slug": "itraraj-100mg-tab",
+      "description": "Veterinary medicine - ITRARAJ-100MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/itraraj-100mg-tab.jpeg"
+      ],
+      "price": 187.5,
+      "compareAtPrice": 216,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 15,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "IVERRAJ-3MG TAB",
+      "slug": "iverraj-3mg-tab",
+      "description": "Veterinary medicine - IVERRAJ-3MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/iveraj-3mg-tab.jpeg"
+      ],
+      "price": 56.25,
+      "compareAtPrice": 65,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 36,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "IVERRAJ-DT 16 TAB",
+      "slug": "iverraj-dt-16-tab",
+      "description": "Veterinary medicine - IVERRAJ-DT 16 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/iverraj-dt-16-tab.jpeg"
+      ],
+      "price": 150,
+      "compareAtPrice": 173,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 44,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "IVERRAJ-10MG TAB",
+      "slug": "iverraj-10mg-tab",
+      "description": "Veterinary medicine - IVERRAJ-10MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/iverraj-10mg-tab.jpeg"
+      ],
+      "price": 93.75,
+      "compareAtPrice": 108,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 52,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "KETOHAT 200 MG TAB",
+      "slug": "ketohat-200-mg-tab",
+      "description": "Veterinary medicine - KETOHAT 200 MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/ketohat-200-mg-tab.jpeg"
+      ],
+      "price": 187.5,
+      "compareAtPrice": 216,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 36,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "METROHAT 300 MG TAB",
+      "slug": "metrohat-300-mg-tab",
+      "description": "Veterinary medicine - METROHAT 300 MG TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/metrohat-300-mg-tab.jpeg"
+      ],
+      "price": 65.63,
+      "compareAtPrice": 75,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 18,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "PANTOHAT-D TAB",
+      "slug": "pantohat-d-tab",
+      "description": "Veterinary medicine - PANTOHAT-D TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/pantohat-d-tab.jpeg"
+      ],
+      "price": 103.13,
+      "compareAtPrice": 119,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 30,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "RAJDOX-LB 100",
+      "slug": "rajdox-lb-100",
+      "description": "Veterinary medicine - RAJDOX-LB 100. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/rajdox-lb-100.jpeg"
+      ],
+      "price": 93.75,
+      "compareAtPrice": 108,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 15,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "RAJDOX-LB 200",
+      "slug": "rajdox-lb-200",
+      "description": "Veterinary medicine - RAJDOX-LB 200. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/rajdox-lb-200.jpeg"
+      ],
+      "price": 159.38,
+      "compareAtPrice": 183,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 18,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "RAJDOX-LB 300 TAB",
+      "slug": "rajdox-lb-300-tab",
+      "description": "Veterinary medicine - RAJDOX-LB 300 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/rajdox-lb-300-tab.jpeg"
+      ],
+      "price": 225,
+      "compareAtPrice": 259,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 12,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "RANTIRAJ TAB",
+      "slug": "rantiraj-tab",
+      "description": "Veterinary medicine - RANTIRAJ TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/rantiraj-tab.jpeg"
+      ],
+      "price": 46.88,
+      "compareAtPrice": 54,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 25,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "RENOHAT PLUS TAB",
+      "slug": "renohat-plus-tab",
+      "description": "Veterinary medicine - RENOHAT PLUS TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/renohat-plus-tab.jpeg"
+      ],
+      "price": 400,
+      "compareAtPrice": 460,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 52,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "TORSOHAT 7.5 TAB",
+      "slug": "torsohat-7-5-tab",
+      "description": "Veterinary medicine - TORSOHAT 7.5 TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/torsohat-7.5-tab.jpeg"
+      ],
+      "price": 80,
+      "compareAtPrice": 92,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 47,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "VITMIN-H TAB",
+      "slug": "vitmin-h-tab",
+      "description": "Veterinary medicine - VITMIN-H TAB. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/vitmin-h-tab.jpeg"
+      ],
+      "price": 150,
+      "compareAtPrice": 173,
+      "stock": 5,
+      "rating": 4.5,
+      "reviewCount": 57,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATPLAT SYRUP",
+      "slug": "hatplat-syrup",
+      "description": "Veterinary medicine - HATPLAT SYRUP. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatplat-tab.jpeg"
+      ],
+      "price": 225,
+      "compareAtPrice": 259,
+      "stock": 3,
+      "rating": 4.5,
+      "reviewCount": 14,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "HATPYRIN SYP",
+      "slug": "hatpyrin-syp",
+      "description": "Veterinary medicine - HATPYRIN SYP. Prescription strength medication for pets.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/hatpyrin-tab.jpeg"
+      ],
+      "price": 168.75,
+      "compareAtPrice": 194,
+      "stock": 3,
+      "rating": 4.5,
+      "reviewCount": 38,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "pet-health",
+        "veterinary"
+      ]
+    },
+    {
+      "name": "Venttura Amino+ 150 ml",
+      "slug": "venttura-amino-150-ml",
+      "description": "Venttura Amino+ 150 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 375,
+      "compareAtPrice": 431,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 24,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Amino+ 250 ml",
+      "slug": "venttura-amino-250-ml",
+      "description": "Venttura Amino+ 250 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 500,
+      "compareAtPrice": 575,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 6,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Ferro+ 150 ml",
+      "slug": "venttura-ferro-150-ml",
+      "description": "Venttura Ferro+ 150 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 265,
+      "compareAtPrice": 305,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 6,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Immuno+ 100 ml",
+      "slug": "venttura-immuno-100-ml",
+      "description": "Venttura Immuno+ 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 465,
+      "compareAtPrice": 535,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 24,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Omega+ 150 ml",
+      "slug": "venttura-omega-150-ml",
+      "description": "Venttura Omega+ 150 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 460,
+      "compareAtPrice": 529,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 12,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Omega+ 250 ml",
+      "slug": "venttura-omega-250-ml",
+      "description": "Venttura Omega+ 250 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 700,
+      "compareAtPrice": 805,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 16,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Omega+ 500 ml",
+      "slug": "venttura-omega-500-ml",
+      "description": "Venttura Omega+ 500 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 1245,
+      "compareAtPrice": 1432,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 18,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Livo+ 150 ml",
+      "slug": "venttura-livo-150-ml",
+      "description": "Venttura Livo+ 150 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 270,
+      "compareAtPrice": 311,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 7,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Livo+ 250 ml",
+      "slug": "venttura-livo-250-ml",
+      "description": "Venttura Livo+ 250 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 410,
+      "compareAtPrice": 471,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 14,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Calci+ Pro 45 Tabs",
+      "slug": "venttura-calci-pro-45-tabs",
+      "description": "Venttura Calci+ Pro 45 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 460,
+      "compareAtPrice": 529,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 10,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Calci+ Pro 90 Tabs",
+      "slug": "venttura-calci-pro-90-tabs",
+      "description": "Venttura Calci+ Pro 90 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 795,
+      "compareAtPrice": 914,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 5,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Flexi+ 45 Tabs",
+      "slug": "venttura-flexi-45-tabs",
+      "description": "Venttura Flexi+ 45 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 990,
+      "compareAtPrice": 1139,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 5,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Flexi+ 90 Tabs",
+      "slug": "venttura-flexi-90-tabs",
+      "description": "Venttura Flexi+ 90 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 1500,
+      "compareAtPrice": 1725,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 15,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Fur+ 45 Tabs",
+      "slug": "venttura-fur-45-tabs",
+      "description": "Venttura Fur+ 45 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 570,
+      "compareAtPrice": 656,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 21,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Fur+ 90 Tabs",
+      "slug": "venttura-fur-90-tabs",
+      "description": "Venttura Fur+ 90 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 990,
+      "compareAtPrice": 1139,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 8,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Lacto+ 45 Tab",
+      "slug": "venttura-lacto-45-tab",
+      "description": "Venttura Lacto+ 45 Tab. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 300,
+      "compareAtPrice": 345,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 10,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Lacto+ 90 Tab",
+      "slug": "venttura-lacto-90-tab",
+      "description": "Venttura Lacto+ 90 Tab. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 500,
+      "compareAtPrice": 575,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 24,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Nutri+ 45 Tabs",
+      "slug": "venttura-nutri-45-tabs",
+      "description": "Venttura Nutri+ 45 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 500,
+      "compareAtPrice": 575,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 15,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Nutri+ 90 Tabs",
+      "slug": "venttura-nutri-90-tabs",
+      "description": "Venttura Nutri+ 90 Tabs. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 875,
+      "compareAtPrice": 1006,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 23,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Inhancer 340 gm",
+      "slug": "venttura-inhancer-340-gm",
+      "description": "Venttura Inhancer 340 gm. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 4200,
+      "compareAtPrice": 4830,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 6,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Amino+ Cat 100 ml",
+      "slug": "venttura-amino-cat-100-ml",
+      "description": "Venttura Amino+ Cat 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 480,
+      "compareAtPrice": 552,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 13,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Ferro+ Cat 100 ml",
+      "slug": "venttura-ferro-cat-100-ml",
+      "description": "Venttura Ferro+ Cat 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 444,
+      "compareAtPrice": 511,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 13,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Omega+ Cat 100 ml",
+      "slug": "venttura-omega-cat-100-ml",
+      "description": "Venttura Omega+ Cat 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 480,
+      "compareAtPrice": 552,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 12,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Livo+ Cat 100 ml",
+      "slug": "venttura-livo-cat-100-ml",
+      "description": "Venttura Livo+ Cat 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 450,
+      "compareAtPrice": 518,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 22,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
+    },
+    {
+      "name": "Venttura Immuno+ Cat 100 ml",
+      "slug": "venttura-immuno-cat-100-ml",
+      "description": "Venttura Immuno+ Cat 100 ml. Premium veterinary healthcare supplement from Venttura Bioceuticals.",
+      "categorySlug": "medicines",
+      "breed": "",
+      "images": [
+        "/products/placeholder.png"
+      ],
+      "price": 510,
+      "compareAtPrice": 587,
+      "stock": 10,
+      "rating": 4.5,
+      "reviewCount": 16,
+      "isBestSeller": false,
+      "tags": [
+        "medicine",
+        "supplement",
+        "pet-health",
+        "venttura"
+      ]
     }
   ],
   "coupons": [
-    { "code": "VETBUDDY10", "type": "percent", "value": 10, "minOrder": 499, "maxUses": 500 },
-    { "code": "PAW50", "type": "flat", "value": 50, "minOrder": 999, "maxUses": 200 }
+    {
+      "code": "WELCOME10",
+      "discount": 10,
+      "discountType": "percentage",
+      "description": "Welcome discount",
+      "maxUses": 100,
+      "minOrderValue": 500
+    }
   ]
 }

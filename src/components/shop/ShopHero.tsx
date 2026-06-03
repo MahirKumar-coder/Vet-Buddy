@@ -21,7 +21,7 @@ export function ShopHero() {
           <span className="gradient-text">delivered fast</span>
         </h1>
         <p className="mt-4 text-slate-600 md:text-lg">
-          Food, toys, medicines & more — trusted by pet parents across Patna.
+          Veterinary medicines, health supplements & wellness care — trusted by pet parents across Patna.
           Same care as our clinic, now at your doorstep.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">

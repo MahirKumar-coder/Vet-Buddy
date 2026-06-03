@@ -1,6 +1,8 @@
 import dotenv from "dotenv"; // Watch restart trigger
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { getRealtimeDatabase } from "./config/firebase.js";
 import { configureCloudinary } from "./config/cloudinary.js";
 import authRoutes from "./routes/auth.js";
@@ -47,6 +49,12 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+// Serve static files (product images)
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const publicPath = path.join(__dirname, "../../public");
+app.use(express.static(publicPath));
+console.log("📁 Serving static files from:", publicPath);
 
 // Request logging (only in development)
 if (NODE_ENV === "development") {

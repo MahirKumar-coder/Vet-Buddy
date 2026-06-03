@@ -62,10 +62,10 @@ export default function ShopPage() {
           <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-6 shadow-glass backdrop-blur-xl">
             <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-sky-brand/10 blur-2xl" />
             <label htmlFor="body-search" className="block text-center font-display text-base sm:text-lg font-bold text-navy-900">
-              Find everything your <span className="gradient-text">pet needs</span>
+              Find the right <span className="gradient-text">care for your pet</span>
             </label>
             <p className="mt-1 text-center text-[10px] sm:text-xs text-slate-500">
-              Search across medicines, premium pet food, grooming supplies, and toys
+              Search across veterinary medicines, health supplements, and care products
             </p>
             <div className="relative mt-4">
               <FiSearch className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
@@ -74,7 +74,7 @@ export default function ShopPage() {
                 type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Type here to search (e.g., Calcium, Pedigree, Toy, Shampoo)..."
+                placeholder="Type here to search (e.g., Calcium, Amino, Azithrohat, Calci)..."
                 className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-12 text-sm text-navy-900 placeholder:text-slate-400 shadow-sm focus:border-sky-brand focus:outline-none focus:ring-1 focus:ring-sky-brand"
               />
               {search && (
