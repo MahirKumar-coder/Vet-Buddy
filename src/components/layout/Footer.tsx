@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PawPrint, Phone, Mail, MapPin, AtSign } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin, AtSign } from "lucide-react";
 import { SECTION_IDS, SITE } from "@/lib/constants";
 
 const quickLinks = [
@@ -28,8 +29,14 @@ export function Footer() {
               href={`#${SECTION_IDS.home}`}
               className="flex items-center gap-2 font-display text-lg font-bold text-white"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-brand to-cyan-glow text-white">
-                <PawPrint className="h-5 w-5" strokeWidth={2} />
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Vet Buddy Logo"
+                  width={36}
+                  height={36}
+                  className="object-cover"
+                />
               </span>
               {SITE.name}
             </Link>

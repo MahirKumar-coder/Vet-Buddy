@@ -3,6 +3,7 @@ import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/providers/ToastProvider";
 import { PageLoader } from "@/components/providers/PageLoader";
+import { FloatingWhatsAppButton } from "@/components/layout/FloatingWhatsAppButton";
 import { SITE } from "@/lib/constants";
 
 const dmSans = DM_Sans({
@@ -47,6 +48,10 @@ export const metadata: Metadata = {
       "Trusted veterinary care, emergency support, and online consultations for your pets.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/favicon.ico",
+    // or use URL: icon: "https://your-cdn.com/favicon.ico"
+  },
 };
 
 export default function RootLayout({
@@ -62,6 +67,7 @@ export default function RootLayout({
         <ToastProvider>
           <PageLoader />
           {children}
+          <FloatingWhatsAppButton />
         </ToastProvider>
       </body>
     </html>

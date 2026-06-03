@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { PawPrint, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { FiShoppingCart, FiSearch } from "react-icons/fi";
 import { SITE, SECTION_IDS } from "@/lib/constants";
 import { SHOP_ROUTES } from "@/lib/shop/constants";
@@ -34,8 +35,14 @@ export function ShopNavbar({ onSearch, searchValue = "" }: Props) {
           href="/"
           className="flex shrink-0 items-center gap-2 font-display text-lg font-bold text-navy-900"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-brand to-cyan-glow text-white">
-            <PawPrint className="h-5 w-5" strokeWidth={2} />
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden">
+            <Image
+              src="/logo.jpeg"
+              alt="Vet Buddy Logo"
+              width={36}
+              height={36}
+              className="object-cover"
+            />
           </span>
           <span className="hidden sm:inline">{SITE.name}</span>
         </Link>

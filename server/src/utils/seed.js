@@ -1,11 +1,6 @@
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-import mongoose from "mongoose";
-import { connectDB } from "../config/db.js";
-import { Admin } from "../models/Admin.js";
-import { Category } from "../models/Category.js";
-import { Product } from "../models/Product.js";
-import { Coupon } from "../models/Coupon.js";
+import { getRealtimeDatabase } from "../config/firebase.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -18,50 +13,89 @@ const seedData = JSON.parse(
 dotenv.config();
 
 async function seed() {
-  await connectDB();
+  console.log("🔥 Starting Firebase Realtime Database Seeding...");
+  const db = getRealtimeDatabase();
 
-  const email = process.env.ADMIN_EMAIL || "admin@vetbuddy.com";
+  // 1. Seed Admin User
+  const email = (process.env.ADMIN_EMAIL || "admin@vetbuddy.com").toLowerCase();
   const password = process.env.ADMIN_PASSWORD || "Admin@123";
   const hash = await bcrypt.hash(password, 10);
-  await Admin.findOneAndUpdate(
-    { email },
-    { email, passwordHash: hash, name: "Vet Buddy Admin" },
-    { upsert: true }
-  );
-  console.log(`Admin: ${email}`);
 
+  const adminsSnapshot = await db.ref("admins").get();
+  let adminKey = "default_admin";
+  
+  if (adminsSnapshot.exists()) {
+    const adminEntry = Object.entries(adminsSnapshot.val()).find(
+      ([, a]) => a.email?.toLowerCase() === email
+    );
+    if (adminEntry) {
+      adminKey = adminEntry[0];
+    }
+  }
+
+  await db.ref(`admins/${adminKey}`).set({
+    email,
+    passwordHash: hash,
+    name: "Vet Buddy Admin",
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  });
+  console.log(`✅ Admin account seeded: ${email}`);
+
+  // 2. Seed Categories
   const categoryMap = {};
   for (const c of seedData.categories) {
-    const cat = await Category.findOneAndUpdate(
-      { slug: c.slug },
-      { ...c, active: true },
-      { upsert: true, new: true }
-    );
-    categoryMap[c.slug] = cat._id;
+    // Use slug as the Firebase key
+    const categoryKey = c.slug;
+    const categoryData = {
+      ...c,
+      active: true,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    
+    await db.ref(`categories/${categoryKey}`).set(categoryData);
+    categoryMap[c.slug] = categoryKey;
   }
-  console.log(`Categories: ${seedData.categories.length}`);
+  console.log(`✅ Categories seeded: ${seedData.categories.length}`);
 
+  // 3. Seed Products
   for (const p of seedData.products) {
-    await Product.findOneAndUpdate(
-      { slug: p.slug },
-      {
-        ...p,
-        category: categoryMap[p.categorySlug],
-        active: true,
-      },
-      { upsert: true, new: true }
-    );
+    // Use slug as the Firebase key
+    const productKey = p.slug;
+    const productData = {
+      ...p,
+      category: categoryMap[p.categorySlug] || p.categorySlug,
+      active: true,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    
+    await db.ref(`products/${productKey}`).set(productData);
   }
-  console.log(`Products: ${seedData.products.length}`);
+  console.log(`✅ Products seeded: ${seedData.products.length}`);
 
+  // 4. Seed Coupons
   for (const c of seedData.coupons) {
-    await Coupon.findOneAndUpdate({ code: c.code }, { ...c, active: true }, { upsert: true });
+    const couponKey = c.code.toUpperCase();
+    const couponData = {
+      ...c,
+      code: c.code.toUpperCase(),
+      usedCount: 0,
+      active: true,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    
+    await db.ref(`coupons/${couponKey}`).set(couponData);
   }
-  console.log("Seed complete");
-  await mongoose.disconnect();
+  console.log(`✅ Coupons seeded: ${seedData.coupons.length}`);
+
+  console.log("\n⭐️ Firebase Database seeding completed successfully!\n");
+  process.exit(0);
 }
 
 seed().catch((e) => {
-  console.error(e);
+  console.error("❌ Seeding failed:", e);
   process.exit(1);
 });

@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv"; // Watch restart trigger
 import express from "express";
 import cors from "cors";
-import { connectDB } from "./config/db.js";
+import { getRealtimeDatabase } from "./config/firebase.js";
 import { configureCloudinary } from "./config/cloudinary.js";
 import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/products.js";
@@ -10,6 +10,7 @@ import orderRoutes from "./routes/orders.js";
 import uploadRoutes from "./routes/upload.js";
 import adminRoutes from "./routes/admin.js";
 import syncRoutes from "./routes/sync.js";
+import paymentRoutes from "./routes/payment.js";
 import { setupAppointmentsListener, syncExistingAppointments } from "./services/firebaseAppointmentListener.js";
 import { setupOrdersListener, syncExistingOrders } from "./services/firebaseOrderListener.js";
 
@@ -17,7 +18,6 @@ dotenv.config();
 
 // Validate required environment variables
 const requiredEnvVars = [
-  "MONGODB_URI",
   "JWT_SECRET",
   "FIREBASE_SERVICE_ACCOUNT",
   "FIREBASE_REALTIME_DB_URL",
@@ -80,6 +80,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/payment", paymentRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/sync", syncRoutes);
@@ -110,9 +111,9 @@ app.use((err, _req, res, _next) => {
 
 async function start() {
   try {
-    // Connect to MongoDB
-    await connectDB();
-    console.log("✅ MongoDB connected");
+    // Initialize Firebase
+    getRealtimeDatabase();
+    console.log("✅ Firebase Realtime DB connected");
 
     // Configure Cloudinary
     configureCloudinary();

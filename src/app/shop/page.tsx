@@ -2,11 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FiFilter } from "react-icons/fi";
+import { FiFilter, FiSearch, FiX } from "react-icons/fi";
 import { ShopNavbar } from "@/components/shop/ShopNavbar";
 import { ShopHero } from "@/components/shop/ShopHero";
-import { BreedCarousel } from "@/components/shop/BreedCarousel";
-import { CategoryPills } from "@/components/shop/CategoryPills";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { FiltersSidebar } from "@/components/shop/FiltersSidebar";
 import { ProductGridSkeleton } from "@/components/shop/ProductSkeleton";
@@ -59,11 +57,38 @@ export default function ShopPage() {
       <ShopNavbar onSearch={setSearch} searchValue={search} />
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-4 md:px-6 md:pb-12">
         <ShopHero />
-        <div className="mt-8">
-          <BreedCarousel selected={breed} onSelect={setBreed} />
-        </div>
-        <div className="mt-6">
-          <CategoryPills selected={category} onSelect={setCategory} />
+        {/* Prominent Body Search Bar */}
+        <div className="mx-auto mt-8 max-w-2xl w-full px-2">
+          <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-6 shadow-glass backdrop-blur-xl">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-sky-brand/10 blur-2xl" />
+            <label htmlFor="body-search" className="block text-center font-display text-base sm:text-lg font-bold text-navy-900">
+              Find everything your <span className="gradient-text">pet needs</span>
+            </label>
+            <p className="mt-1 text-center text-[10px] sm:text-xs text-slate-500">
+              Search across medicines, premium pet food, grooming supplies, and toys
+            </p>
+            <div className="relative mt-4">
+              <FiSearch className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+              <input
+                id="body-search"
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Type here to search (e.g., Calcium, Pedigree, Toy, Shampoo)..."
+                className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-12 text-sm text-navy-900 placeholder:text-slate-400 shadow-sm focus:border-sky-brand focus:outline-none focus:ring-1 focus:ring-sky-brand"
+              />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-navy-900 transition"
+                  aria-label="Clear search"
+                >
+                  <FiX className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
 
         <div id="products" className="mt-10 flex gap-6">

@@ -10,7 +10,7 @@ const initializeFirebaseAdmin = () => {
         databaseURL: process.env.FIREBASE_REALTIME_DB_URL,
       });
       
-      console.log("✅ Firebase Admin SDK initialized");
+      console.log("✅ Firebase Admin SDK initialized successfully");
     } catch (error) {
       console.error("❌ Error initializing Firebase Admin:", error.message);
     }
@@ -22,28 +22,144 @@ export const getRealtimeDatabase = () => {
   return admin.database();
 };
 
-export const getFirestore = () => {
-  initializeFirebaseAdmin();
-  return admin.firestore();
+// ==========================================
+// ADMIN DB HELPERS
+// ==========================================
+export const getAdminFromDB = async (email) => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("admins").get();
+  if (!snapshot.exists()) return null;
+  const admins = snapshot.val();
+  return Object.entries(admins)
+    .map(([id, val]) => ({ id, ...val }))
+    .find((admin) => admin.email?.toLowerCase() === email?.toLowerCase()) || null;
 };
 
-// Realtime Database - Appointments
+export const getAdminByIdFromDB = async (id) => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref(`admins/${id}`).get();
+  return snapshot.exists() ? { id, ...snapshot.val() } : null;
+};
+
+// ==========================================
+// PRODUCT DB HELPERS
+// ==========================================
+export const getProductsFromDB = async () => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("products").get();
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, val]) => ({ id, ...val }));
+};
+
+export const getProductFromDB = async (idOrSlug) => {
+  const db = getRealtimeDatabase();
+  // Try ID first
+  const snapshot = await db.ref(`products/${idOrSlug}`).get();
+  if (snapshot.exists() && snapshot.val().active !== false) {
+    return { id: idOrSlug, ...snapshot.val() };
+  }
+  // Lookup by slug
+  const all = await getProductsFromDB();
+  return all.find((p) => (p.slug === idOrSlug || p.id === idOrSlug) && p.active !== false) || null;
+};
+
+// ==========================================
+// CATEGORY DB HELPERS
+// ==========================================
+export const getCategoriesFromDB = async () => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("categories").get();
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, val]) => ({ id, ...val }));
+};
+
+// ==========================================
+// COUPON DB HELPERS
+// ==========================================
+export const getCouponsFromDB = async () => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("coupons").get();
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, val]) => ({ id, ...val }));
+};
+
+export const getCouponByCodeFromDB = async (code) => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("coupons").get();
+  if (!snapshot.exists()) return null;
+  return Object.entries(snapshot.val())
+    .map(([id, val]) => ({ id, ...val }))
+    .find((c) => c.code?.toUpperCase() === code?.toUpperCase()) || null;
+};
+
+// ==========================================
+// CUSTOMER DB HELPERS
+// ==========================================
+export const getCustomersFromDB = async () => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("customers").get();
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, val]) => ({ id, ...val }));
+};
+
+export const getCustomerByPhoneFromDB = async (phone) => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("customers").get();
+  if (!snapshot.exists()) return null;
+  return Object.entries(snapshot.val())
+    .map(([id, val]) => ({ id, ...val }))
+    .find((c) => c.phone === phone) || null;
+};
+
+// ==========================================
+// ORDER DB HELPERS
+// ==========================================
+export const getOrdersFromDB = async () => {
+  const db = getRealtimeDatabase();
+  const snapshot = await db.ref("orders").get();
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, val]) => ({ id, ...val }));
+};
+
+export const getOrderFromDB = async (orderId) => {
+  const db = getRealtimeDatabase();
+  // Try pushing ID
+  const snapshot = await db.ref(`orders/${orderId}`).get();
+  if (snapshot.exists()) {
+    return { id: orderId, ...snapshot.val() };
+  }
+  // Lookup by custom orderId VBxxx
+  const all = await getOrdersFromDB();
+  return all.find((o) => o.orderId === orderId || o.id === orderId) || null;
+};
+
+export const updateOrderInDB = async (orderId, updates) => {
+  const db = getRealtimeDatabase();
+  // We need to resolve key first
+  const order = await getOrderFromDB(orderId);
+  if (!order) throw new Error("Order not found");
+  
+  await db.ref(`orders/${order.id}`).update({
+    ...updates,
+    updatedAt: admin.database.ServerValue.TIMESTAMP,
+  });
+  return order.id;
+};
+
+// ==========================================
+// APPOINTMENT DB HELPERS
+// ==========================================
 export const getAppointmentFromDB = async (appointmentId) => {
   const db = getRealtimeDatabase();
   const snapshot = await db.ref(`appointments/${appointmentId}`).get();
-  return snapshot.exists() ? snapshot.val() : null;
+  return snapshot.exists() ? { id: appointmentId, ...snapshot.val() } : null;
 };
 
 export const getAllAppointmentsFromDB = async () => {
   const db = getRealtimeDatabase();
   const snapshot = await db.ref("appointments").get();
-  
-  if (!snapshot.exists()) {
-    return [];
-  }
-  
-  const data = snapshot.val();
-  return Object.entries(data).map(([id, appointment]) => ({
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, appointment]) => ({
     id,
     ...appointment,
   }));
@@ -52,74 +168,38 @@ export const getAllAppointmentsFromDB = async () => {
 export const createAppointmentInDB = async (appointmentData) => {
   const db = getRealtimeDatabase();
   const appointmentRef = db.ref("appointments").push();
-  
   await appointmentRef.set({
     ...appointmentData,
     createdAt: admin.database.ServerValue.TIMESTAMP,
     updatedAt: admin.database.ServerValue.TIMESTAMP,
   });
-  
   return appointmentRef.key;
 };
 
 export const updateAppointmentInDB = async (appointmentId, updates) => {
   const db = getRealtimeDatabase();
-  
   await db.ref(`appointments/${appointmentId}`).update({
     ...updates,
     updatedAt: admin.database.ServerValue.TIMESTAMP,
   });
 };
 
-// Firestore - Orders
-export const getOrderFromFirestore = async (orderId) => {
-  const db = getFirestore();
-  const doc = await db.collection("orders").doc(orderId).get();
-  
-  return doc.exists ? { id: doc.id, ...doc.data() } : null;
-};
-
-export const getAllOrdersFromFirestore = async () => {
-  const db = getFirestore();
-  const snapshot = await db.collection("orders").orderBy("createdAt", "desc").get();
-  
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-};
-
-export const createOrderInFirestore = async (orderData) => {
-  const db = getFirestore();
-  
-  const newOrder = {
-    ...orderData,
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-  };
-  
-  const docRef = await db.collection("orders").add(newOrder);
-  return docRef.id;
-};
-
-export const updateOrderInFirestore = async (orderId, updates) => {
-  const db = getFirestore();
-  
-  await db.collection("orders").doc(orderId).update({
-    ...updates,
-    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-  });
-};
-
 export default {
   getRealtimeDatabase,
-  getFirestore,
+  getAdminFromDB,
+  getAdminByIdFromDB,
+  getProductsFromDB,
+  getProductFromDB,
+  getCategoriesFromDB,
+  getCouponsFromDB,
+  getCouponByCodeFromDB,
+  getCustomersFromDB,
+  getCustomerByPhoneFromDB,
+  getOrdersFromDB,
+  getOrderFromDB,
+  updateOrderInDB,
   getAppointmentFromDB,
   getAllAppointmentsFromDB,
   createAppointmentInDB,
   updateAppointmentInDB,
-  getOrderFromFirestore,
-  getAllOrdersFromFirestore,
-  createOrderInFirestore,
-  updateOrderInFirestore,
 };

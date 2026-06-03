@@ -5,12 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ShopNavbar } from "@/components/shop/ShopNavbar";
-import { QRPayment } from "@/components/shop/QRPayment";
+import { RazorpayPayment } from "@/components/shop/RazorpayPayment";
 import { useCart } from "@/context/CartContext";
-import { getProduct, createOrder, markOrderPaid } from "@/lib/shop/api";
+import { getProduct, createOrder } from "@/lib/shop/api";
 import {
   createOrder as createOrderFirebase,
-  markOrderAsPaid,
 } from "@/lib/firebase/realtimeorderservice";
 import { formatINR } from "@/lib/shop/format";
 import { SHOP_ROUTES } from "@/lib/shop/constants";
@@ -159,33 +158,16 @@ function CheckoutContent() {
   };
 
   const handlePaid = async () => {
-    try {
-      // Mark as paid in backend if available
-      if (dbOrderId) {
-        try {
-          await markOrderPaid(dbOrderId);
-        } catch (err) {
-          console.warn("Backend payment update failed, continuing...", err);
-        }
-      }
+    // Payment has been verified on server-side
+    // Just clear cart and show success
+    clearCart();
+    setStep("done");
+    showToast("✅ Payment successful! Order placed successfully!");
+  };
 
-      // 🔥 Mark as paid in Firebase
-      if (firebaseOrderId) {
-        try {
-          await markOrderAsPaid(firebaseOrderId);
-          console.log("✅ Firebase order marked as paid:", firebaseOrderId);
-        } catch (err) {
-          console.error("⚠️ Firebase payment update failed:", err);
-        }
-      }
-
-      clearCart();
-      setStep("done");
-      showToast("✅ Order placed successfully!");
-    } catch (error) {
-      console.error("❌ Error finalizing payment:", error);
-      showToast("❌ Error completing payment. Please contact support.");
-    }
+  const handlePaymentError = (error: string) => {
+    console.error("❌ Payment error:", error);
+    showToast(`❌ Payment failed: ${error}`);
   };
 
   if (checkoutItems.length === 0 && step === "form") {
@@ -273,7 +255,16 @@ function CheckoutContent() {
               </button>
             </form>
           ) : (
-            <QRPayment amount={total} orderId={orderId} onPaid={handlePaid} />
+            <RazorpayPayment
+              amount={total}
+              orderId={orderId}
+              dbOrderId={dbOrderId}
+              customerName={form.customerName}
+              customerEmail={form.email}
+              customerPhone={form.phone}
+              onSuccess={handlePaid}
+              onError={handlePaymentError}
+            />
           )}
 
           <div className="rounded-2xl border border-white/10 bg-shop-card p-6 h-fit">

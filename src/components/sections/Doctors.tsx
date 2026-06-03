@@ -12,14 +12,14 @@ const doctors = [
     degree: "M.V.Sc (Surgery), PGDAW",
     image:
       "https://ui-avatars.com/api/?name=Prince+Kumar+Jha&background=0F172A&color=38BDF8&size=400&bold=true",
-    experience: "10+ years",
+    experience: "2+ years",
   },
   {
     name: "Dr. Sonali Raj",
     degree: "PGDAW, B.V.Sc & A.H.",
     image:
       "https://ui-avatars.com/api/?name=Sonali+Raj&background=38BDF8&color=0F172A&size=400&bold=true",
-    experience: "8+ years",
+    experience: "2+ years",
   },
 ];
 

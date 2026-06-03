@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Building2,
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SECTION_IDS } from "@/lib/constants";
+import { HomeVisitModal } from "@/components/ui/HomeVisitModal";
 
 const services = [
   { title: "Pet Hospital", icon: Building2 },
@@ -32,6 +34,8 @@ const services = [
 ];
 
 export function Services() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section id={SECTION_IDS.services} className="py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
@@ -51,34 +55,55 @@ export function Services() {
         </motion.div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ title, icon: Icon }, i) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: (i % 6) * 0.05 }}
-            >
-              <GlassCard className="h-full p-5">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-brand/15 to-cyan-glow/10 text-sky-600">
-                    <Icon className="h-6 w-6" strokeWidth={1.75} />
+          {services.map(({ title, icon: Icon }, i) => {
+            const isHomeVisit = title === "Home Visits";
+            return (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: (i % 6) * 0.05 }}
+                onClick={isHomeVisit ? () => setIsModalOpen(true) : undefined}
+                className={isHomeVisit ? "cursor-pointer" : undefined}
+              >
+                <GlassCard 
+                  className={`h-full p-5 ${
+                    isHomeVisit 
+                      ? "hover:border-sky-brand/50 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5" 
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-brand/15 to-cyan-glow/10 text-sky-600">
+                      <Icon className="h-6 w-6" strokeWidth={1.75} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-display text-lg font-semibold text-navy-900 flex items-center justify-between">
+                        {title}
+                        {isHomeVisit && (
+                          <span className="inline-flex items-center rounded-full bg-sky-50 px-2 py-0.5 text-3xs font-semibold text-sky-brand uppercase tracking-wider">
+                            Info
+                          </span>
+                        )}
+                      </h3>
+                      <p className="mt-1 text-sm text-slate-600">
+                        {isHomeVisit 
+                          ? "Day & Night home medical checks, treatments and vaccinations across Patna. Tap for details."
+                          : "Protocol-driven care with gentle handling and clear pet parent communication."
+                        }
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display text-lg font-semibold text-navy-900">
-                      {title}
-                    </h3>
-                    <p className="mt-1 text-sm text-slate-600">
-                      Protocol-driven care with gentle handling and clear pet
-                      parent communication.
-                    </p>
-                  </div>
-                </div>
-              </GlassCard>
-            </motion.div>
-          ))}
+                </GlassCard>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Home Visit Details Modal */}
+      <HomeVisitModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

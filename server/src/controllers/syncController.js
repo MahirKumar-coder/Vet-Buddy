@@ -1,5 +1,5 @@
 import { getAllAppointmentsFromDB } from "../config/firebase.js";
-import { getAllOrdersFromFirestore } from "../config/firebase.js";
+import { getOrdersFromDB } from "../config/firebase.js";
 import { syncAllAppointmentsToSheets } from "../services/appointmentSyncService.js";
 import { syncAllOrdersToSheets } from "../services/orderSyncService.js";
 
@@ -27,7 +27,7 @@ export const manualSyncAppointments = async (_req, res) => {
 export const manualSyncOrders = async (_req, res) => {
   try {
     console.log("🔄 Manual sync triggered for orders...");
-    const orders = await getAllOrdersFromFirestore();
+    const orders = await getOrdersFromDB();
     await syncAllOrdersToSheets(orders);
     
     res.json({
@@ -50,7 +50,7 @@ export const manualSyncAll = async (_req, res) => {
     console.log("🔄 Manual sync triggered for all data...");
     
     const appointments = await getAllAppointmentsFromDB();
-    const orders = await getAllOrdersFromFirestore();
+    const orders = await getOrdersFromDB();
     
     await syncAllAppointmentsToSheets(appointments);
     await syncAllOrdersToSheets(orders);

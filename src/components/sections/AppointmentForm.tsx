@@ -32,6 +32,7 @@ export function AppointmentForm() {
       
       // Extract form values with validation
       const name = formData.get("name") as string;
+      const email = formData.get("email") as string;
       const phone = formData.get("phone") as string;
       const petType = formData.get("petType") as string;
       const service = formData.get("service") as string;
@@ -39,13 +40,21 @@ export function AppointmentForm() {
       const message = formData.get("message") as string;
 
       // Validate required fields
-      if (!name || !phone || !petType || !service || !date) {
+      if (!name || !email || !phone || !petType || !service || !date) {
         showToast("❌ Please fill all required fields");
         setSubmitting(false);
         return;
       }
 
-      console.log("📝 Form data:", { name, phone, petType, service, date, message });
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast("❌ Please enter a valid email address");
+        setSubmitting(false);
+        return;
+      }
+
+      console.log("📝 Form data:", { name, email, phone, petType, service, date, message });
 
       // Generate a customer ID
       const customerId = `customer_${Date.now()}`;
@@ -54,7 +63,7 @@ export function AppointmentForm() {
         customerId,
         customerName: name,
         customerPhone: phone,
-        customerEmail: "",
+        customerEmail: email,
         petType,
         petName: "",
         serviceType: service,
@@ -136,17 +145,28 @@ export function AppointmentForm() {
                 />
               </label>
               <label className="block text-sm font-medium text-navy-900">
-                Phone
+                Email
                 <input
                   required
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="10-digit mobile"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="your@email.com"
                   className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white/80 px-4 py-3 text-sm outline-none ring-sky-brand/30 transition focus:ring-2"
                 />
               </label>
             </div>
+            <label className="block text-sm font-medium text-navy-900">
+              Phone
+              <input
+                required
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                placeholder="10-digit mobile"
+                className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white/80 px-4 py-3 text-sm outline-none ring-sky-brand/30 transition focus:ring-2"
+              />
+            </label>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-sm font-medium text-navy-900">
                 Pet type
