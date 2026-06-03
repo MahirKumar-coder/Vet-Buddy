@@ -37,10 +37,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-// Security middleware - Allow local dev hosts, custom CLIENT_URL, and Vercel domains
+// Security middleware - Allow local dev hosts, custom CLIENT_URL, Vercel domains, and production custom domain
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
+  "https://www.vetbuddyindia.com",
+  "https://vetbuddyindia.com",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -50,7 +52,11 @@ app.use(
       // Allow requests with no origin (like mobile apps, curl, or diagnostic tools)
       if (!origin) return callback(null, true);
       
-      const isAllowed = allowedOrigins.some(allowed => origin === allowed) || origin.endsWith(".vercel.app");
+      const isAllowed = 
+        allowedOrigins.some(allowed => origin === allowed) || 
+        origin.endsWith(".vercel.app") || 
+        origin.includes("vetbuddyindia.com");
+        
       if (isAllowed) {
         callback(null, true);
       } else {
