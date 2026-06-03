@@ -39,6 +39,7 @@ router.get("/", async (req, res) => {
 
     let productList = Object.entries(productsSnapshot.val()).map(([id, val]) => ({
       id,
+      _id: id,
       ...val,
     }));
 
@@ -132,6 +133,7 @@ router.get("/:slug", async (req, res) => {
 
     const productList = Object.entries(productsSnapshot.val()).map(([id, val]) => ({
       id,
+      _id: id,
       ...val,
     }));
 
@@ -179,7 +181,7 @@ router.post("/", authAdmin, async (req, res) => {
     };
 
     await newProductRef.set(product);
-    res.status(201).json({ id: newProductRef.key, ...product });
+    res.status(201).json({ id: newProductRef.key, _id: newProductRef.key, ...product });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -197,7 +199,7 @@ router.put("/:id", authAdmin, async (req, res) => {
     };
 
     await productRef.update(updates);
-    res.json({ id: req.params.id, ...updates });
+    res.json({ id: req.params.id, _id: req.params.id, ...updates });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

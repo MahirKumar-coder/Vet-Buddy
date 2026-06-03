@@ -67,17 +67,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback((product: Product, qty = 1) => {
     setItems((prev) => {
-      const existing = prev.find((i) => i.productId === product._id);
+      const pId = product._id || (product as any).id;
+      const existing = prev.find((i) => i.productId === pId);
       if (existing) {
         const nextQty = Math.min(existing.quantity + qty, product.stock);
         return prev.map((i) =>
-          i.productId === product._id ? { ...i, quantity: nextQty } : i
+          i.productId === pId ? { ...i, quantity: nextQty } : i
         );
       }
       return [
         ...prev,
         {
-          productId: product._id,
+          productId: pId,
           slug: product.slug,
           name: product.name,
           image: product.images[0] || "",
