@@ -15,6 +15,8 @@ import syncRoutes from "./routes/sync.js";
 import paymentRoutes from "./routes/payment.js";
 import { setupAppointmentsListener, syncExistingAppointments } from "./services/firebaseAppointmentListener.js";
 import { setupOrdersListener, syncExistingOrders } from "./services/firebaseOrderListener.js";
+import { initCronJobs } from "./services/cron.js";
+
 
 dotenv.config();
 
@@ -165,9 +167,11 @@ async function start() {
       console.log("✅ All Firebase listeners initialized\n");
     } catch (firebaseError) {
       console.warn("⚠️  Firebase sync warning (non-critical):", firebaseError.message);
-      console.log("ℹ️  Continuing startup without Firebase sync...\n");
     }
     
+    // Initialize Cron Job Scheduler
+    initCronJobs();
+
     // Start server
     app.listen(PORT, () => {
       console.log(`🚀 API running on http://localhost:${PORT}`);
