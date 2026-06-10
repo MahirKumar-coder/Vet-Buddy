@@ -16,6 +16,7 @@ import paymentRoutes from "./routes/payment.js";
 import { setupAppointmentsListener, syncExistingAppointments } from "./services/firebaseAppointmentListener.js";
 import { setupOrdersListener, syncExistingOrders } from "./services/firebaseOrderListener.js";
 import { initCronJobs } from "./services/cron.js";
+import { connectRedis } from "./config/redis.js";
 
 
 dotenv.config();
@@ -147,6 +148,9 @@ async function start() {
     // Initialize Firebase
     getRealtimeDatabase();
     console.log("✅ Firebase Realtime DB connected");
+
+    // Initialize Redis Cache
+    await connectRedis();
 
     // Configure Cloudinary
     configureCloudinary();

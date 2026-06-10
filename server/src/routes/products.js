@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getRealtimeDatabase } from "../config/firebase.js";
 import { authAdmin } from "../middleware/auth.js";
+import { getCache, setCache, clearCachePattern } from "../config/redis.js";
 
 const router = Router();
 
@@ -28,29 +29,38 @@ router.get("/", async (req, res) => {
 
     const db = getRealtimeDatabase();
     
-    // Fetch products
-    const productsSnapshot = await db.ref("products").get();
-    if (!productsSnapshot.exists()) {
-      return res.json({
-        products: [],
-        pagination: { page: Number(page), limit: Number(limit), total: 0, pages: 0 },
-      });
+    // Fetch products (from cache or Firebase)
+    let productsVal = await getCache("products:raw");
+    if (!productsVal) {
+      const productsSnapshot = await db.ref("products").get();
+      if (!productsSnapshot.exists()) {
+        return res.json({
+          products: [],
+          pagination: { page: Number(page), limit: Number(limit), total: 0, pages: 0 },
+        });
+      }
+      productsVal = productsSnapshot.val();
+      await setCache("products:raw", productsVal, 3600); // Cache for 1 hour
     }
 
-    let productList = Object.entries(productsSnapshot.val()).map(([id, val]) => ({
+    let productList = Object.entries(productsVal).map(([id, val]) => ({
       id,
       _id: id,
       ...val,
     }));
 
-    // Fetch categories for population mapping
-    const categoriesSnapshot = await db.ref("categories").get();
-    const categoriesMap = {};
-    if (categoriesSnapshot.exists()) {
-      Object.entries(categoriesSnapshot.val()).forEach(([id, val]) => {
-        categoriesMap[id] = { id, name: val.name, slug: val.slug };
-      });
+    // Fetch categories for population mapping (from cache or Firebase)
+    let categoriesVal = await getCache("categories:raw");
+    if (!categoriesVal) {
+      const categoriesSnapshot = await db.ref("categories").get();
+      categoriesVal = categoriesSnapshot.exists() ? categoriesSnapshot.val() : {};
+      await setCache("categories:raw", categoriesVal, 3600); // Cache for 1 hour
     }
+
+    const categoriesMap = {};
+    Object.entries(categoriesVal).forEach(([id, val]) => {
+      categoriesMap[id] = { id, name: val.name, slug: val.slug };
+    });
 
     // Populate category field & active filter
     productList = productList.map((p) => {
@@ -124,14 +134,26 @@ router.get("/", async (req, res) => {
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
-    const db = getRealtimeDatabase();
     
-    const productsSnapshot = await db.ref("products").get();
-    if (!productsSnapshot.exists()) {
-      return res.status(404).json({ message: "Product not found" });
+    // Check cache first
+    const cachedProduct = await getCache(`products:detail:${slug}`);
+    if (cachedProduct) {
+      return res.json(cachedProduct);
     }
 
-    const productList = Object.entries(productsSnapshot.val()).map(([id, val]) => ({
+    const db = getRealtimeDatabase();
+    
+    let productsVal = await getCache("products:raw");
+    if (!productsVal) {
+      const productsSnapshot = await db.ref("products").get();
+      if (!productsSnapshot.exists()) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      productsVal = productsSnapshot.val();
+      await setCache("products:raw", productsVal, 3600);
+    }
+
+    const productList = Object.entries(productsVal).map(([id, val]) => ({
       id,
       _id: id,
       ...val,
@@ -148,12 +170,19 @@ router.get("/:slug", async (req, res) => {
 
     // Populate category
     if (product.category) {
-      const categorySnapshot = await db.ref(`categories/${product.category}`).get();
-      if (categorySnapshot.exists()) {
-        const catVal = categorySnapshot.val();
+      let categoriesVal = await getCache("categories:raw");
+      if (!categoriesVal) {
+        const categoriesSnapshot = await db.ref("categories").get();
+        categoriesVal = categoriesSnapshot.exists() ? categoriesSnapshot.val() : {};
+        await setCache("categories:raw", categoriesVal, 3600);
+      }
+      const catVal = categoriesVal[product.category];
+      if (catVal) {
         product.category = { id: product.category, name: catVal.name, slug: catVal.slug };
       }
     }
+
+    await setCache(`products:detail:${slug}`, product, 3600); // Cache for 1 hour
 
     res.json(product);
   } catch (err) {
@@ -181,6 +210,10 @@ router.post("/", authAdmin, async (req, res) => {
     };
 
     await newProductRef.set(product);
+    
+    // Invalidate product caches
+    await clearCachePattern("products:*");
+
     res.status(201).json({ id: newProductRef.key, _id: newProductRef.key, ...product });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -199,6 +232,10 @@ router.put("/:id", authAdmin, async (req, res) => {
     };
 
     await productRef.update(updates);
+    
+    // Invalidate product caches
+    await clearCachePattern("products:*");
+
     res.json({ id: req.params.id, _id: req.params.id, ...updates });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -215,6 +252,9 @@ router.delete("/:id", authAdmin, async (req, res) => {
       active: false,
       updatedAt: Date.now(),
     });
+    
+    // Invalidate product caches
+    await clearCachePattern("products:*");
     
     res.json({ message: "Product deactivated" });
   } catch (err) {

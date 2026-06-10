@@ -1,11 +1,17 @@
 import { Router } from "express";
 import { getRealtimeDatabase } from "../config/firebase.js";
 import { authAdmin } from "../middleware/auth.js";
+import { getCache, setCache, clearCachePattern } from "../config/redis.js";
 
 const router = Router();
 
 router.get("/", async (_req, res) => {
   try {
+    const cachedCategories = await getCache("categories:all");
+    if (cachedCategories) {
+      return res.json(cachedCategories);
+    }
+
     const db = getRealtimeDatabase();
     const snapshot = await db.ref("categories").get();
     if (!snapshot.exists()) {
@@ -16,6 +22,8 @@ router.get("/", async (_req, res) => {
       .map(([id, val]) => ({ id, ...val }))
       .filter((c) => c.active !== false)
       .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      
+    await setCache("categories:all", categories, 3600); // Cache for 1 hour
       
     res.json(categories);
   } catch (err) {
@@ -37,6 +45,11 @@ router.post("/", authAdmin, async (req, res) => {
     };
     
     await newCategoryRef.set(category);
+    
+    // Invalidate caches
+    await clearCachePattern("categories:*");
+    await clearCachePattern("products:*");
+
     res.status(201).json({ id: newCategoryRef.key, ...category });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -54,6 +67,11 @@ router.put("/:id", authAdmin, async (req, res) => {
     };
     
     await categoryRef.update(updates);
+
+    // Invalidate caches
+    await clearCachePattern("categories:*");
+    await clearCachePattern("products:*");
+
     res.json({ id: req.params.id, ...updates });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -69,6 +87,10 @@ router.delete("/:id", authAdmin, async (req, res) => {
       active: false,
       updatedAt: Date.now(),
     });
+    
+    // Invalidate caches
+    await clearCachePattern("categories:*");
+    await clearCachePattern("products:*");
     
     res.json({ message: "Category deactivated" });
   } catch (err) {
